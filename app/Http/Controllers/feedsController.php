@@ -89,40 +89,22 @@ class feedsController extends Controller
      */
     public function upload(Request $request)
     {
-
-        /*
-        * O campo do form com o arquivo tinha o atributo name="file".
-         * $file = $request->file('listaxml');
-        *$path = $file->store('gerenciar');*/
-
-       /* $file = Input::file('file');
-
-
-
-        if (empty($file)) {
-            abort(400, 'Nenhum arquivo foi enviado.');
-        }
-
-        $path = storage_path($file->store('gerenciar'));
-
-        $xml = simplexml_load_file($file);
-        $listaxml = $this->xmlToArray($xml);
-        var_dump($listaxml);
-        return view('gerenciar',['listaxml'=> $listaxml] );
-       */
         $file = Input::file('file');
-
         $xml = simplexml_load_file($file);
-
         return view('gerenciar',['xml'=>$xml]);
-
     }
+
     public function gerenciarXML()
     {
 
         return view('comecando');
     }
 
+    public function criando(Request $request)
+    {
+        $file = Input::get('string');
+        var_dump($file);
 
+    }
 
 }

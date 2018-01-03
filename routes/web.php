@@ -21,3 +21,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/comecando', 'feedsController@gerenciarXML');
 Route::post('/comecando', 'feedsController@upload');
+
+Route::post('/criando', 'feedsController@criando');
+
