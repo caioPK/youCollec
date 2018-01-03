@@ -27,7 +27,8 @@
 
                                    <div class="col-md-6">
                                        <input id="name" type="text" class="form-control" placeholder="New collection" name="name" required autofocus>
-                                       <input type="submit">
+                                       <input type="submit" onclick ="enviar()">
+                                       <input type="hidden" name="lista" value="">
                                        @if ($errors->has('name'))
                                            <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -54,9 +55,9 @@
                                                <tr>
                                                    <td>{{$lista[0]['text']}}</td>
                                                    <td>
-                                                       <button class="btn btn-sm" id="novocanal" onclick="insere('{{$xml->body->outline->outline[ $loop->index ]['xmlUrl']}}',
+                                                       <button class="btn btn-sm" id="novocanal" onclick="this.disabled=true;insere('{{$xml->body->outline->outline[ $loop->index ]['xmlUrl']}}',
                                                                                                                 '{{$xml->body->outline->outline[ $loop->index ]['text']}}')">Adicionar</button>
-                                                       <button class="btn btn-sm">Excluir</button>
+
                                                    </td>
                                                </tr>
                                            @endforeach
@@ -88,11 +89,17 @@
         </div>
     </div>
         <script type="text/javascript">
+            
             var arra=[];
+            var listastring='';
 
+            function enviar() {
+                document.forms[0].lista.value = listastring;
+            }
             function insere (a,b) {
                 arra.push(a);
-               document.getElementById("listaurl").innerHTML =arra[(arra.length)-1];
+                listastring = listastring + "@" +a;
+               document.getElementById("listaurl").innerHTML =listastring;
                 var ul = document.getElementById("listCanal");
                 var li = document.createElement("li");
                 li.appendChild(document.createTextNode(b));

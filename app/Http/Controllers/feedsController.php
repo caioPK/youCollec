@@ -102,8 +102,11 @@ class feedsController extends Controller
 
     public function criando(Request $request)
     {
-        $file = Input::get('string');
-        var_dump($file);
+        $file = $request->input('lista');
+        $nome = $request->input('name');
+
+        $lista = explode('@',$file );
+        return view('criando',['nome'=>$nome, 'lista' =>$lista]);
 
     }
 
