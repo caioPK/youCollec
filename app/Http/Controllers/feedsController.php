@@ -1,13 +1,9 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
-
 class feedsController extends Controller
 {
-
     function xmlToArray($xml, $options = array()) {
         $defaults = array(
             'namespaceSeparator' => ':', // você pode querer que isso seja algo diferente de um cólon
@@ -22,7 +18,6 @@ class feedsController extends Controller
         $options = array_merge($defaults, $options);
         $namespaces = $xml->getDocNamespaces();
         $namespaces[''] = null; // adiciona namespace base(vazio)
-
         // Obtém os atributos de todos os namespaces
         $attributesArray = array();
         foreach ($namespaces as $prefix => $namespace) {
@@ -36,7 +31,6 @@ class feedsController extends Controller
                 $attributesArray[$attributeKey] = (string)$attribute;
             }
         }
-
         // Obtém nós filhos de todos os namespaces
         $tagsArray = array();
         foreach ($namespaces as $prefix => $namespace) {
@@ -44,13 +38,11 @@ class feedsController extends Controller
                 // Recursividade em nós filho
                 $childArray = $this->xmlToArray($childXml, $options);
                 list($childTagName, $childProperties) = each($childArray);
-
                 // Substituir caracteres no nome da tag
                 if ($options['keySearch']) $childTagName =
                     str_replace($options['keySearch'], $options['keyReplace'], $childTagName);
                 // Adiciona um prefixo namespace, se houver
                 if ($prefix) $childTagName = $prefix . $options['namespaceSeparator'] . $childTagName;
-
                 if (!isset($tagsArray[$childTagName])) {
                     // Só entra com esta chave
                     // Testa se as tags deste tipo deve ser sempre matrizes, não importa a contagem de elementos
@@ -67,15 +59,12 @@ class feedsController extends Controller
                 }
             }
         }
-
         // Obtém o texto do nó
         $textContentArray = array();
         $plainText = trim((string)$xml);
         if ($plainText !== '') $textContentArray[$options['textContent']] = $plainText;
-
         $propertiesArray = !$options['autoText'] || $attributesArray || $tagsArray || ($plainText === '')
             ? array_merge($attributesArray, $tagsArray, $textContentArray) : $plainText;
-
         // Retorna o nó como array
         return array(
             $xml->getName() => $propertiesArray
@@ -93,21 +82,16 @@ class feedsController extends Controller
         $xml = simplexml_load_file($file);
         return view('gerenciar',['xml'=>$xml]);
     }
-
     public function gerenciarXML()
     {
-
         return view('comecando');
     }
-
     public function criando(Request $request)
     {
-        $file = $request->input('lista');
+        $file = $request->input('hlista');
         $nome = $request->input('name');
-
         $lista = explode('@',$file );
-        return view('criando',['nome'=>$nome, 'lista' =>$lista]);
 
+        return view('criando',['nome'=>$nome, 'lista' =>$file]);
     }
-
 }

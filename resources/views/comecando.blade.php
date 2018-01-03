@@ -5,7 +5,10 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Gerenciar incrições</div>
+                    @if(Auth::guest())
+                        Você deve logar primeiro.
+                    @else
+                        <div class="panel-heading">Gerenciar incrições</div>
                         <form action="{{url('comecando')}}" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <input type="file" name="file"/>
@@ -13,7 +16,8 @@
                         </form>
 
 
-                    <div class="panel-body">
+                        <div class="panel-body">
+                    @endif
 
                     </div>
                 </div>
