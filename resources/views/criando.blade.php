@@ -1,3 +1,2 @@
-<br>{{$nome}}
-
-    {{$lista}}<br>
+Input com sucesso<br>
+{{$canais}}

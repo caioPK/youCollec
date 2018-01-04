@@ -1,7 +1,11 @@
 <?php
 namespace App\Http\Controllers;
+use App\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+
+
 class feedsController extends Controller
 {
     function xmlToArray($xml, $options = array()) {
@@ -88,10 +92,16 @@ class feedsController extends Controller
     }
     public function criando(Request $request)
     {
-        $file = $request->input('hlista');
-        $nome = $request->input('name');
-        $lista = explode('@',$file );
 
-        return view('criando',['nome'=>$nome, 'lista' =>$file]);
+        Collection::create(
+            [
+                'collecName'=>$request->input('name'),
+                'usuario' => '2',
+                'canais' =>$request->input('hlista')
+            ]
+        );
+        $name = $request->input('name');
+        $feed = DB::table('collections')->where('collecName', $name)->value('canais');
+        return view('criando',['canais'=>$feed]);
     }
-}
+    }

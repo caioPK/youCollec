@@ -94,14 +94,14 @@
         </div>
         <script type="text/javascript">
 
-            var arra=[];
+
             var listastring='';
             function enviar() {
                 document.getElementById('hlista').value = listastring;
             }
             function insere (a,b) {
-                arra.push(a);
-                listastring = listastring + "@" +a;
+
+                listastring = listastring + "@" + a.replace ("https://www.youtube.com/feeds/videos.xml?channel_id=", "");
                 document.getElementById("listaurl").innerHTML =listastring;
                 var ul = document.getElementById("listCanal");
                 var li = document.createElement("li");

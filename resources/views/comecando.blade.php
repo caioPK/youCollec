@@ -17,9 +17,9 @@
 
 
                         <div class="panel-body">
-                    @endif
+                            @endif
 
-                    </div>
+                        </div>
                 </div>
             </div>
         </div>

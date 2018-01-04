@@ -17,7 +17,7 @@ class CreateCollectionsTable extends Migration
             $table->increments('id');
             $table->string('collecName', 40)->unique();
             $table->string('usuario');
-            $table->text('canais');
+            $table->longText('canais');
             $table->timestamps();
         });
     }
