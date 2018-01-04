@@ -19,13 +19,13 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/comecando', 'feedsController@gerenciarXML');
+Route::get('/comecando', 'feedsController@enviarXML');
 Route::post('/comecando', 'feedsController@upload');
 
-Route::post('/criando', 'feedsController@criando');
-Route::get('/criando', 'feedsController@carregarCanais');
 
-Route::get('/gerenciar', 'feedsController@gerenciarXML');
+Route::get('/gerenciar', 'feedsController@carregarCanais');
+Route::post('/gerenciar', 'feedsController@criando');
 
+Route::get('alimentarFeed', 'feedsController@alimentandoFeed')->name('alimentar');
 
 

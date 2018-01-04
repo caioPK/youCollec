@@ -22,7 +22,7 @@
 
                                 <div class="panel-body " >
 
-                                    <form class="form-horizontal" method="POST" action="{{ url('criando') }}">
+                                    <form class="form-horizontal" method="POST" action="{{ url('gerenciar') }}">
                                         {{ csrf_field() }}
                                         <input name="string" type="hidden" value="">
                                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
