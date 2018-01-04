@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use App\Collection;
+use App\XML;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -85,18 +86,26 @@ class feedsController extends Controller
     public function upload(Request $request)
     {
         $path = $request->file('file')->store('xmls');
-
-        $file = Storage::get($path);
+        XML::create(
+            [
+                'idUser'=>Auth::user()->id,
+                'filePath' => $path,
+            ]
+        );
+        $file = Storage::get(DB::table('xmls')->where('idUser', Auth::user()->id)->value('filePath'));
         $xml = simplexml_load_string($file);
         return view('gerenciar',['xml'=>$xml]);
     }
+
+
     public function gerenciarXML()
     {
         return view('comecando');
     }
+
+
     public function criando(Request $request)
     {
-
         Collection::create(
             [
                 'idUser'=>Auth::user()->id,

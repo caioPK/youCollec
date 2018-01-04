@@ -10,7 +10,6 @@ class XML extends Model
     protected $table = 'xmls';
 
     protected $fillable=[
-        'idXml',
         'idUser',
         'filePath',
     ];
