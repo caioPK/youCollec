@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCollectionsTable extends Migration
+class CreateXMLsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,14 @@ class CreateCollectionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('collections', function (Blueprint $table) {
-            $table->increments('idCat');
-            $table->integer('idUser')->unsigned();
-            $table->string('nomeCat', 40);
-            $table->text('canaisId');
+        Schema::create('xmls', function (Blueprint $table) {
+            $table->increments('idXml');
+            $table->integer('idUser')->unsigned()->unique();
+            $table->text('filePath');
             $table->timestamps();
 
-            $table->foreign('idUser')->references('id')->on('users');
 
+            $table->foreign('idUser')->references('id')->on('users');
         });
     }
 
@@ -32,6 +31,6 @@ class CreateCollectionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('collections');
+        Schema::dropIfExists('x_m_ls');
     }
 }

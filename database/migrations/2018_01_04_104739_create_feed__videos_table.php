@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCollectionsTable extends Migration
+class CreateFeedVideosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,20 @@ class CreateCollectionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('collections', function (Blueprint $table) {
-            $table->increments('idCat');
+        Schema::create(/**
+         * @param Blueprint $table
+         */
+            'feed__videos', function (Blueprint $table) {
+            $table->string('idVideo');
             $table->integer('idUser')->unsigned();
-            $table->string('nomeCat', 40);
-            $table->text('canaisId');
-            $table->timestamps();
+            $table->integer('idCat')->unsigned();
+            $table->boolean('assistido');
 
             $table->foreign('idUser')->references('id')->on('users');
+            $table->foreign('idCat')->references('idCat')->on('collections');
 
         });
+
     }
 
     /**
@@ -32,6 +36,6 @@ class CreateCollectionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('collections');
+        Schema::dropIfExists('feed__videos');
     }
 }

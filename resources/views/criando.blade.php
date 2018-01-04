@@ -1,2 +1,2 @@
-Input com sucesso<br>
+<br>uma string qualquer: <br>
 {{$canais}}

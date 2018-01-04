@@ -2,8 +2,10 @@
 namespace App\Http\Controllers;
 use App\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Storage;
 
 
 class feedsController extends Controller
@@ -82,8 +84,10 @@ class feedsController extends Controller
      */
     public function upload(Request $request)
     {
-        $file = Input::file('file');
-        $xml = simplexml_load_file($file);
+        $path = $request->file('file')->store('xmls');
+
+        $file = Storage::get($path);
+        $xml = simplexml_load_string($file);
         return view('gerenciar',['xml'=>$xml]);
     }
     public function gerenciarXML()
@@ -95,13 +99,13 @@ class feedsController extends Controller
 
         Collection::create(
             [
-                'collecName'=>$request->input('name'),
-                'usuario' => '2',
-                'canais' =>$request->input('hlista')
+                'idUser'=>Auth::user()->id,
+                'nomeCat' => $request->input('name'),
+                'canaisId' =>$request->input('hlista')
             ]
         );
         $name = $request->input('name');
-        $feed = DB::table('collections')->where('collecName', $name)->value('canais');
+        $feed = DB::table('collections')->where('nomeCat', $name)->value('canaisId');
         return view('criando',['canais'=>$feed]);
     }
     }

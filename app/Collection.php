@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Collection extends Model
 {
+    protected $primaryKey = 'idCat';
     protected $fillable=[
-        'collecName',
-        'usuario',
-        'canais'
+        'idUser',
+        'nomeCat',
+        'canaisId'
     ];
-    protected $table = 'collections';
+
 }
