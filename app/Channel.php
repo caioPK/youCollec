@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Channel extends Model
 {
     protected $primaryKey = 'url';
-    protected $incrementing = false;
+    public $incrementing = false;
     protected $keyType = 'string';
 
     public $timestamps = false;

@@ -23,4 +23,9 @@ Route::get('/comecando', 'feedsController@gerenciarXML');
 Route::post('/comecando', 'feedsController@upload');
 
 Route::post('/criando', 'feedsController@criando');
+Route::get('/criando', 'feedsController@carregarCanais');
+
+Route::get('/gerenciar', 'feedsController@gerenciarXML');
+
+
 
