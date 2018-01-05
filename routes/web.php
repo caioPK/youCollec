@@ -28,4 +28,5 @@ Route::post('/gerenciar', 'feedsController@criando');
 
 Route::get('alimentarFeed', 'feedsController@alimentandoFeed')->name('alimentar');
 
-
+Route::get('categorias','collectionsController@listaCat');
+Route::get('categorias/{id}','collectionsController@videosCat');
